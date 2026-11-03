@@ -1,0 +1,156 @@
+
+<!-- Cabeçalho da loja -->
+<header>
+
+  <!-- Nome da loja -->
+  <h1>WORLD OFFICE</h1>
+
+  <!-- Menu de navegação -->
+  <nav>
+    <a href="#inicio">Início</a>
+    <a href="#produtos">Produtos</a>
+    <a href="#carrinho">Carrinho</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+</header>
+
+<!-- Seção de apresentação da loja -->
+<section id="inicio">
+
+  <!-- Título principal -->
+  <h2>Materiais para seu dia a dia</h2>
+
+  <!-- Descrição da loja -->
+  <p>Tudo para estudar, trabalhar e organizar suas ideias.</p>
+
+</section>
+
+<!-- Seção de produtos -->
+<section id="produtos">
+
+  <!-- Título da seção -->
+  <h2>Nossos produtos</h2>
+
+  <!-- Lista de cartões dos produtos -->
+  <div class="produtos">
+
+    <!-- Primeiro produto -->
+    <div class="produto">
+      <h3>Caneta azul</h3>
+      <p>R$ 2,50</p>
+
+      <!-- Botão para adicionar a caneta ao carrinho -->
+      <button (click)="adicionarAoCarrinho('Caneta azul', 2.50)">
+        Comprar
+      </button>
+    </div>
+
+    <!-- Segundo produto -->
+    <div class="produto">
+      <h3>Caderno universitário</h3>
+      <p>R$ 18,00</p>
+
+      <!-- Botão para adicionar o caderno ao carrinho -->
+      <button (click)="adicionarAoCarrinho('Caderno universitário', 18.00)">
+        Comprar
+      </button>
+    </div>
+
+    <!-- Terceiro produto -->
+    <div class="produto">
+      <h3>Lápis preto</h3>
+      <p>R$ 1,50</p>
+
+      <!-- Botão para adicionar o lápis ao carrinho -->
+      <button (click)="adicionarAoCarrinho('Lápis preto', 1.50)">
+        Comprar
+      </button>
+    </div>
+
+    <!-- Quarto produto -->
+    <div class="produto">
+      <h3>Régua</h3>
+      <p>R$ 3,00</p>
+
+      <!-- Botão para adicionar a régua ao carrinho -->
+      <button (click)="adicionarAoCarrinho('Régua', 3.00)">
+        Comprar
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- Seção de contato -->
+<section id="contato">
+
+  <!-- Título do contato -->
+  <h2>Contato</h2>
+
+  <!-- Mensagem de contato -->
+  <p>Entre em contato com a World Office.</p>
+
+</section>
+
+<!-- Seção do carrinho de compras -->
+<section id="carrinho">
+
+  <!-- Título do carrinho -->
+  <h2>Meu carrinho</h2>
+
+  <!-- Verifica se existem produtos no carrinho -->
+  <div *ngIf="carrinho.length > 0">
+
+    <!-- Percorre e apresenta cada produto do carrinho -->
+    <div *ngFor="let produto of carrinho">
+
+      <!-- Mostra os dados do produto -->
+      <p>
+        <!-- Nome do produto -->
+        {{ produto.nome }}
+
+        <!-- Quantidade de unidades -->
+        | Quantidade: {{ produto.quantidade }}
+
+        <!-- Preço de uma unidade -->
+        | Valor unitário: R$ {{ produto.preco.toFixed(2) }}
+
+        <!-- Subtotal do produto -->
+        | Subtotal: R$ {{ (produto.preco * produto.quantidade).toFixed(2) }}
+      </p>
+
+      <!-- Botão para diminuir uma unidade -->
+      <button (click)="diminuirQuantidade(produto.nome)">
+        -
+      </button>
+
+      <!-- Botão para aumentar uma unidade -->
+      <button (click)="aumentarQuantidade(produto.nome)">
+        +
+      </button>
+
+      <!-- Botão para remover o produto inteiro -->
+      <button (click)="removerDoCarrinho(produto.nome)">
+        Remover
+      </button>
+
+    </div>
+
+    <!-- Mostra o valor total da compra -->
+    <h3>Total: R$ {{ calcularTotal().toFixed(2) }}</h3>
+
+  </div>
+
+  <!-- Mensagem exibida quando não existem produtos -->
+  <div *ngIf="carrinho.length === 0">
+    <p>Seu carrinho está vazio.</p>
+  </div>
+
+</section>
+
+<!-- Rodapé da loja -->
+<footer>
+  <p>World Office - 2026</p>
+</footer>
