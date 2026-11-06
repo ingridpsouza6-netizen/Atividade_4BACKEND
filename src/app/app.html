@@ -1,156 +1,182 @@
 
 <!-- Cabeçalho da loja -->
 <header>
+  <h1>Estética & Bem Estar</h1>
 
-  <!-- Nome da loja -->
-  <h1>WORLD OFFICE</h1>
-
-  <!-- Menu de navegação -->
   <nav>
     <a href="#inicio">Início</a>
     <a href="#produtos">Produtos</a>
     <a href="#carrinho">Carrinho</a>
     <a href="#contato">Contato</a>
   </nav>
-
 </header>
 
-<!-- Seção de apresentação da loja -->
+<!-- Apresentação -->
 <section id="inicio">
-
-  <!-- Título principal -->
-  <h2>Materiais para seu dia a dia</h2>
-
-  <!-- Descrição da loja -->
-  <p>Tudo para estudar, trabalhar e organizar suas ideias.</p>
-
+  <h2>Cuide de você todos os dias.</h2>
+  <p>Produtos e serviços para sua beleza e bem-estar.</p>
 </section>
 
-<!-- Seção de produtos -->
+<!-- Catálogo dinâmico -->
 <section id="produtos">
-
-  <!-- Título da seção -->
   <h2>Nossos produtos</h2>
+  <!-- Opções para filtrar os produtos por categoria -->
+  
+<div class="filtros-categoria">
 
-  <!-- Lista de cartões dos produtos -->
+  <!-- Mostra todos os produtos -->
+  <button (click)="categoriaSelecionada = 0">
+    Todas as categorias
+  </button>
+
+  <!-- Mostra produtos da categoria 1 -->
+  <button (click)="categoriaSelecionada = 1">
+    Categoria 1
+  </button>
+
+  <!-- Mostra produtos da categoria 2 -->
+  <button (click)="categoriaSelecionada = 2">
+    Categoria 2
+  </button>
+
+</div>
+
+  <!-- Campo para pesquisar produtos pelo nome -->
+<input
+type="text"
+placeholder="Pesquisar produto..."
+[(ngModel)]="pesquisa"
+>
+
+ 
   <div class="produtos">
 
-    <!-- Primeiro produto -->
-    <div class="produto">
-      <h3>Caneta azul</h3>
-      <p>R$ 2,50</p>
+   <!-- Exibe produtos conforme a pesquisa e a categoria selecionada -->
+<div class="produto" *ngFor="let produto of filtrarPorCategoria(categoriaSelecionada)">
+    
+      <h3>{{ produto.nome }}</h3>
+      <p>{{ produto.descricao }}</p>
+      <p>R$ {{ produto.preco }}</p>
 
-      <!-- Botão para adicionar a caneta ao carrinho -->
-      <button (click)="adicionarAoCarrinho('Caneta azul', 2.50)">
-        Comprar
-      </button>
-    </div>
+<!-- Mostra a quantidade disponível no estoque -->
+<p>Estoque disponível: {{ consultarQuantidadeEstoque(produto.iditem) }}</p>
 
-    <!-- Segundo produto -->
-    <div class="produto">
-      <h3>Caderno universitário</h3>
-      <p>R$ 18,00</p>
-
-      <!-- Botão para adicionar o caderno ao carrinho -->
-      <button (click)="adicionarAoCarrinho('Caderno universitário', 18.00)">
-        Comprar
-      </button>
-    </div>
-
-    <!-- Terceiro produto -->
-    <div class="produto">
-      <h3>Lápis preto</h3>
-      <p>R$ 1,50</p>
-
-      <!-- Botão para adicionar o lápis ao carrinho -->
-      <button (click)="adicionarAoCarrinho('Lápis preto', 1.50)">
-        Comprar
-      </button>
-    </div>
-
-    <!-- Quarto produto -->
-    <div class="produto">
-      <h3>Régua</h3>
-      <p>R$ 3,00</p>
-
-      <!-- Botão para adicionar a régua ao carrinho -->
-      <button (click)="adicionarAoCarrinho('Régua', 3.00)">
+      <button (click)="adicionarAoCarrinho(produto.nome, produto.preco)">
         Comprar
       </button>
     </div>
 
   </div>
-
 </section>
 
-<!-- Seção de contato -->
+<!-- Contato -->
 <section id="contato">
-
-  <!-- Título do contato -->
   <h2>Contato</h2>
-
-  <!-- Mensagem de contato -->
-  <p>Entre em contato com a World Office.</p>
-
+  <p>Entre em contato com a Mimo Estética.</p>
 </section>
 
-<!-- Seção do carrinho de compras -->
-<section id="carrinho">
+<!-- Cadastro de clientes -->
+<section id="cadastro">
+  <h2>Cadastre-se na Mimo Estética</h2>
+  <p>Preencha seus dados para realizar seu cadastro.</p>
 
-  <!-- Título do carrinho -->
+  <form (ngSubmit)="cadastrarCliente()">
+
+    <label>Nome completo:</label>
+    <input
+      type="text"
+      name="nomeCliente"
+      [(ngModel)]="nomeCliente"
+      placeholder="Digite seu nome completo"
+      required
+    >
+
+    <label>CPF:</label>
+    <input
+      type="text"
+      name="cpfCliente"
+      [(ngModel)]="cpfCliente"
+      placeholder="Digite seu CPF"
+      maxlength="11"
+      required
+    >
+
+    <label>Data de nascimento:</label>
+    <input
+      type="date"
+      name="dataNascimentoCliente"
+      [(ngModel)]="dataNascimentoCliente"
+      required
+    >
+
+    <label>Sexo:</label>
+    <select
+      name="sexoCliente"
+      [(ngModel)]="sexoCliente"
+      required
+    >
+      <option value="">Selecione</option>
+      <option value="F">Feminino</option>
+      <option value="M">Masculino</option>
+    </select>
+
+    <label>E-mail:</label>
+    <input
+      type="email"
+      name="emailCliente"
+      [(ngModel)]="emailCliente"
+      placeholder="Digite seu e-mail"
+      required
+    >
+
+    <label>Telefone:</label>
+    <input
+      type="tel"
+      name="telefoneCliente"
+      [(ngModel)]="telefoneCliente"
+      placeholder="Digite seu telefone"
+      required
+    >
+
+    <button type="submit">Cadastrar cliente</button>
+
+  </form>
+
+  <!-- Mensagem de retorno do cadastro -->
+  <p *ngIf="mensagemCadastro">
+    {{ mensagemCadastro }}
+  </p>
+</section>
+
+
+<!-- Carrinho -->
+<section id="carrinho">
   <h2>Meu carrinho</h2>
 
-  <!-- Verifica se existem produtos no carrinho -->
   <div *ngIf="carrinho.length > 0">
 
-    <!-- Percorre e apresenta cada produto do carrinho -->
     <div *ngFor="let produto of carrinho">
-
-      <!-- Mostra os dados do produto -->
       <p>
-        <!-- Nome do produto -->
         {{ produto.nome }}
-
-        <!-- Quantidade de unidades -->
         | Quantidade: {{ produto.quantidade }}
-
-        <!-- Preço de uma unidade -->
         | Valor unitário: R$ {{ produto.preco.toFixed(2) }}
-
-        <!-- Subtotal do produto -->
         | Subtotal: R$ {{ (produto.preco * produto.quantidade).toFixed(2) }}
       </p>
 
-      <!-- Botão para diminuir uma unidade -->
-      <button (click)="diminuirQuantidade(produto.nome)">
-        -
-      </button>
-
-      <!-- Botão para aumentar uma unidade -->
-      <button (click)="aumentarQuantidade(produto.nome)">
-        +
-      </button>
-
-      <!-- Botão para remover o produto inteiro -->
-      <button (click)="removerDoCarrinho(produto.nome)">
-        Remover
-      </button>
-
+      <button (click)="diminuirQuantidade(produto.nome)">-</button>
+      <button (click)="aumentarQuantidade(produto.nome)">+</button>
+      <button (click)="removerDoCarrinho(produto.nome)">Remover</button>
     </div>
 
-    <!-- Mostra o valor total da compra -->
     <h3>Total: R$ {{ calcularTotal().toFixed(2) }}</h3>
-
   </div>
 
-  <!-- Mensagem exibida quando não existem produtos -->
   <div *ngIf="carrinho.length === 0">
     <p>Seu carrinho está vazio.</p>
   </div>
-
 </section>
 
-<!-- Rodapé da loja -->
+<!-- Rodapé -->
 <footer>
-  <p>World Office - 2026</p>
+  <p>Mimo Estética - 2026</p>
 </footer>

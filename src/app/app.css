@@ -1,62 +1,227 @@
-/* Configuração geral */
+
+/*  Configuração geral */
 :host {
   display: block;
   min-height: 100vh;
   font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: #FFF8DC;
+  color: #65583F;
 }
+
 /* Cabeçalho */
 header {
-  background-color: #1c2d41;
-  color: white;
-  padding: 20px;
+  background-color: #FFF1B8;
+  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+header h1 {
+  margin: 0;
 }
 
 /* Menu */
+nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 nav a {
-  color: white;
+  color: #65583F;
   text-decoration: none;
-  margin-left: 20px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #B18A32;
 }
 
 /* Seções */
 section {
-  padding: 30px;
+  padding: 30px 40px;
+}
+
+section h2 {
+  margin-top: 0;
+  margin-bottom: 22px;
+}
+
+/* Filtros de categoria */
+.filtros-categoria {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.filtros-categoria button {
+  min-width: 145px;
+  padding: 11px 18px;
+  border-radius: 25px;
+}
+
+/* Campo de pesquisa */
+input[type="text"] {
+  display: block;
+  width: 100%;
+  max-width: 450px;
+  box-sizing: border-box;
+  padding: 13px 16px;
+  margin: 0 auto 25px;
+  border: 1px solid #E8D49A;
+  border-radius: 25px;
+  outline: none;
+  font-size: 15px;
 }
 
 /* Lista de produtos */
 .produtos {
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  align-items: stretch;
+  gap: 22px;
   flex-wrap: wrap;
 }
 
 /* Cartões dos produtos */
 .produto {
-  background-color: white;
+  background-color: #FFFFFF;
   padding: 20px;
-  width: 180px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  width: 220px;
+  box-sizing: border-box;
+  border: 1px solid #F1DFA7;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  box-shadow: 0 3px 10px rgba(101, 88, 63, 0.07);
+}
+
+.produto h3 {
+  margin: 0;
+  font-size: 17px;
 }
 
 /* Botões */
 button {
-  background-color: #1c2d41;
-  color: white;
+  background-color: #F5D77A;
+  color: #65583F;
   border: none;
-  padding: 10px 15px;
+  border-radius: 8px;
+  padding: 10px 16px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #EBC85E;
+}
+
+/* Botão comprar */
+.produto button {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Itens do carrinho */
+#carrinho > div > div {
+  background-color: #FFFFFF;
+  border: 1px solid #F1DFA7;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
 }
 
 /* Rodapé */
 footer {
-  background-color: #1c2d41;
-  color: white;
+  background-color: #FFF1B8;
+  color: #65583F;
   text-align: center;
-  padding: 15px;
+  padding: 18px;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 600px) {
+  header {
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  nav {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  section {
+    padding: 25px 18px;
+  }
+
+  .produto {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+/* Cadastro de clientes */
+#cadastro {
+  background-color: #FFF8DC;
+  padding: 40px 20px;
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+#cadastro h2 {
+  text-align: center;
+  color: #65583F;
+}
+
+#cadastro p {
+  text-align: center;
+  color: #65583F;
+}
+
+#cadastro form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#cadastro label {
+  color: #65583F;
+  font-weight: bold;
+}
+
+#cadastro input,
+#cadastro select {
+  padding: 12px;
+  border: 1px solid #E5D8A8;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+#cadastro button {
+  background-color: #E8C96A;
+  color: #65583F;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#cadastro button:hover {
+  background-color: #DDB94F;
 }
